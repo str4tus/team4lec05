@@ -54,30 +54,30 @@ public class AsyncShopService57 {
    * @param emitter
    */
 
-  /*
-   * @Async
-   * public void asyncShowFruitsList(SseEmitter emitter) {
-   * dbUpdated = true;
-   * try {
-   * while (true) {// 無限ループ
-   * // DBが更新されていなければ0.5s休み
-   * if (false == dbUpdated) {
-   * TimeUnit.MILLISECONDS.sleep(500);
-   * continue;
-   * }
-   * // DBが更新されていれば更新後のフルーツリストを取得してsendし，1s休み，dbUpdatedをfalseにする
-   * ArrayList<Fruit> fruits7 = this.syncShowFruitsList();
-   * emitter.send(fruits7);
-   * TimeUnit.MILLISECONDS.sleep(1000);
-   * dbUpdated = false;
-   * }
-   * } catch (Exception e) {
-   * // 例外の名前とメッセージだけ表示する
-   * logger.warn("Exception:" + e.getClass().getName() + ":" + e.getMessage());
-   * } finally {
-   * emitter.complete();
-   * }
-   * System.out.println("asyncShowFruitsList complete");
-   * }
-   */
+
+   @Async
+   public void asyncShowFruitsList(SseEmitter emitter) {
+   dbUpdated = true;
+   try {
+   while (true) {// 無限ループ
+   // DBが更新されていなければ0.5s休み
+   if (false == dbUpdated) {
+   TimeUnit.MILLISECONDS.sleep(500);
+   continue;
+   }
+   // DBが更新されていれば更新後のフルーツリストを取得してsendし，1s休み，dbUpdatedをfalseにする
+    ArrayList<Fruit> fruits7 = this.syncShowFruitsList();
+    emitter.send(fruits7);
+    TimeUnit.MILLISECONDS.sleep(1000);
+    dbUpdated = false;
+    }
+    } catch (Exception e) {
+    // 例外の名前とメッセージだけ表示する
+    logger.warn("Exception:" + e.getClass().getName() + ":" + e.getMessage());
+    } finally {
+    emitter.complete();
+    }
+    System.out.println("asyncShowFruitsList complete");
+    }
+
 }

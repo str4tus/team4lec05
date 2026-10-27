@@ -15,7 +15,6 @@ import team04.lec05.team4lec05.model.Fruit;
 import team04.lec05.team4lec05.model.FruitMapper;
 import team04.lec05.team4lec05.service.AsyncShopService57;
 
-
 @Controller
 @RequestMapping("/sample5")
 public class Sample57Controller {
@@ -51,5 +50,19 @@ public class Sample57Controller {
 
     return "sample57.html";
   }
+
+  /**
+   * JavaScriptからEventSourceとして呼び出されるGETリクエスト SseEmitterを返すことで，PUSH型の通信を実現する
+   *
+   * @return
+   */
+
+  @GetMapping("step9")
+  public SseEmitter sample59() {
+    final SseEmitter sseEmitter = new SseEmitter();
+    this.shop57.asyncShowFruitsList(sseEmitter);
+    return sseEmitter;
+  }
+
 
 }
